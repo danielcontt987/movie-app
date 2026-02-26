@@ -1,9 +1,12 @@
-import { Text, View } from 'react-native'
+import { Text, View } from 'react-native';
+
+import './global.css';
 
 const RootLayout = () => {
+
   return (
-    <View>
-      <Text>RootLayou</Text>
+    <View className='mt-10'>
+      <Text className="text-2xl font-bold">RootLayout</Text>
     </View>
   )
 }
