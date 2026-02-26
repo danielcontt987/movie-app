@@ -1,13 +1,20 @@
-import { Text, View } from 'react-native';
-
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+import { Stack } from 'expo-router';
 import './global.css';
 
 const RootLayout = () => {
-
+  const queryClient = new QueryClient()
   return (
-    <View className='mt-10'>
-      <Text className="text-2xl font-bold">RootLayout</Text>
-    </View>
+    <QueryClientProvider client={queryClient}>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      />
+    </QueryClientProvider>
   )
 }
 
