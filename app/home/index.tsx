@@ -21,13 +21,31 @@ const HomeScreen = () => {
         <View className='mt-2 pb-10' >
           <Text className='text-3xl font-bold mb-2 px-4'>MoviesApp</Text>
           {/* Carrusel de películas en cartelera */}
-          <MainSlaiderShow movies={nowPlayingQuery.data ?? []} />
+          <MainSlaiderShow
+            movies={nowPlayingQuery.data ?? []}
+          />
           {/* las peliculas populares */}
-          <MoviesHorizontalList className='mb-2' title='Populares' movies={popularQuery.data ?? []} />
+          <MoviesHorizontalList
+            className='mb-2'
+            title='Populares'
+            movies={popularQuery.data ?? []}
+          />
           {/*Las peliculas mejor calificadas */}
-          <MoviesHorizontalList className='mb-2' title='Mejores Calificadas' movies={topRetedQuery.data ?? []} />
+          <MoviesHorizontalList
+            className='mb-2'
+            title='Mejores Calificadas'
+            // movies={
+            //   topRetedQuery.data?.pages.flatMap(page => page ?? []) ?? []
+            // }
+            movies={topRetedQuery.data?.pages.flat() ?? []}
+            loadingNextPage={topRetedQuery.fetchNextPage}
+          />
           {/*Proximanete */}
-          <MoviesHorizontalList className='mb-2' title='Proximamente' movies={upComingQuery.data ?? []} />
+          <MoviesHorizontalList
+            className='mb-2'
+            title='Proximamente'
+            movies={upComingQuery.data ?? []}
+          />
           <StatusBar barStyle={"default"} />
         </View>
       </ScrollView>

@@ -2,7 +2,7 @@ import { nowPlayAction } from "@/core/actions/movies/now-play.action"
 import { popularMovieAction } from "@/core/actions/movies/popular.action"
 import { topRetedAction } from "@/core/actions/movies/top-rated"
 import { upComingMovieAction } from "@/core/actions/movies/upcoming"
-import { useQuery } from "@tanstack/react-query"
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 
 export const useMovies = () => {
     const nowPlayingQuery = useQuery({ 
@@ -17,10 +17,15 @@ export const useMovies = () => {
         staleTime: 1000 * 60 * 60 * 24, // 5 minutes
     })
 
-    const topRetedQuery = useQuery({ 
+    const topRetedQuery = useInfiniteQuery({ 
+        initialPageParam: 1,
         queryKey: ['movies', 'top-reted'], 
-        queryFn: topRetedAction,
+        queryFn: ({pageParam}) => {            
+            return topRetedAction({page: pageParam})
+            
+        },
         staleTime: 1000 * 60 * 60 * 24, // 5 minutes
+        getNextPageParam: (lastPage, pages) => pages.length +1
     })
 
     const upComingQuery = useQuery({ 
