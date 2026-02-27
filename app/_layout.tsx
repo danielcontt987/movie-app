@@ -3,19 +3,30 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { Stack } from 'expo-router';
+import { StyleSheet } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import './global.css';
 
-const RootLayout = () => {
-  const queryClient = new QueryClient()
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-      />
-    </QueryClientProvider>
-  )
-}
+const queryClient = new QueryClient();
 
-export default RootLayout
+const RootLayout = () => {
+  return (
+    <GestureHandlerRootView style={styles.container}>
+      <QueryClientProvider client={queryClient}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+        />
+      </QueryClientProvider>
+    </GestureHandlerRootView>
+  );
+};
+
+export default RootLayout;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
