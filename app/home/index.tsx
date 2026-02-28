@@ -17,7 +17,7 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View className='mt-2 pb-10' >
           <Text className='text-3xl font-bold mb-2 px-4'>MoviesApp</Text>
           {/* Carrusel de películas en cartelera */}
