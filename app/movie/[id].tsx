@@ -1,3 +1,5 @@
+import MovieActors from '@/presentations/components/movie/MovieActors';
+import MovieDescription from '@/presentations/components/movie/MovieDescription';
 import MovieHeader from '@/presentations/components/movie/MovieHeader';
 import { useMovie } from '@/presentations/hooks/useMovie';
 import { useLocalSearchParams } from 'expo-router';
@@ -7,7 +9,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 const MovieScreen = () => {
   const { id } = useLocalSearchParams();
  
-  const {movieQuery} = useMovie(+id);
+  const {movieQuery, castQuery} = useMovie(+id);
 
 
   if(movieQuery.isLoading || !movieQuery.data){
@@ -24,12 +26,17 @@ const MovieScreen = () => {
 
 
   return (
-      <ScrollView>
+      <ScrollView  showsVerticalScrollIndicator={false}>
         <MovieHeader 
             poster={movieQuery.data.poster} 
             originTitle={movieQuery.data.originalTitle} 
             title={movieQuery.data.title} 
         />
+        <MovieDescription movie={movieQuery.data} />
+        <Text>
+        </Text>
+        <MovieActors cast={castQuery.data ?? []} />
+
       </ScrollView>
   );
 };
